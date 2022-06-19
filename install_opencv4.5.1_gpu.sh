@@ -31,7 +31,7 @@ cd opencv-${version}/
 echo "** Building..."
 mkdir build
 cd build/
-cmake -D WITH_CUDA=ON -D WITH_CUDNN=ON -D OPENCV_DNN_CUDA=ON -D CUDNN_INCLUDE_DIR=/usr/local/cuda/include -D CUDNN_LIBRARY=/usr/local/cuda/lib64/libcudnn.so.8.3.0 -D WITH_CUBLAS=1 -D CUDA_ARCH_BIN="7.2" -D CUDA_ARCH_PTX="" -D OPENCV_GENERATE_PKGCONFIG=ON -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-${version}/modules -D WITH_GSTREAMER=ON -D WITH_LIBV4L=ON -D BUILD_opencv_python2=ON -D BUILD_opencv_python3=ON -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_EXAMPLES=OFF -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+cmake -D WITH_CUDA=ON -D WITH_CUDNN=ON -D OPENCV_DNN_CUDA=ON -D CUDNN_INCLUDE_DIR=/usr/local/cuda-11.5/include -D CUDNN_LIBRARY=/usr/local/cuda-11.5/lib64/libcudnn.so.8.3.0 -D WITH_CUBLAS=1 -D CUDA_ARCH_BIN="7.5" -D CUDA_ARCH_PTX="" -D CUDA_FAST_MATH=1 -D ENABLE_FAST_MATH=1 -D OPENCV_GENERATE_PKGCONFIG=ON -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-${version}/modules -D WITH_GSTREAMER=ON -D WITH_LIBV4L=ON -D BUILD_opencv_python2=ON -D BUILD_opencv_python3=ON -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_EXAMPLES=OFF -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
 make -j$(nproc)
 sudo make install
 

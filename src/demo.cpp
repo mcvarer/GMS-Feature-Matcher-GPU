@@ -14,9 +14,8 @@ void GmsMatch(Mat &img1, Mat &img2);
 Mat DrawInlier(Mat &src1, Mat &src2, vector<KeyPoint> &kpt1, vector<KeyPoint> &kpt2, vector<DMatch> &inlier, int type);
 
 void runImagePair() {
-	Mat img1 = imread("data/01.jpg");
-	Mat img2 = imread("data/02.jpg");
-
+	Mat img1 = imread("data/shop_sign1.png");
+	Mat img2 = imread("data/shop_sign2.png");
     auto start = high_resolution_clock::now();
 	GmsMatch(img1, img2);
 	auto stop = high_resolution_clock::now();

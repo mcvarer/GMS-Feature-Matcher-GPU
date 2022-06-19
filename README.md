@@ -8,3 +8,13 @@
 3. `cmake Cmakelits.txt`
 4. `sudo make`
 5. `./gms_match_demo`
+
+## Results:
+
+- on CPU
+  - Get total 1050 matches.
+  - Time taken by function: **231285** microseconds
+
+- on GPU :
+  - Get total 1054 matches. 
+  - Time taken by function: **149061** microseconds
