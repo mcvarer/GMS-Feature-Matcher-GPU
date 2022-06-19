@@ -11,10 +11,10 @@
 
 ## Results:
 
-- on CPU
-  - Get total 1050 matches.
-  - Time taken by function: **231285** microseconds
+- on CPU 
+  - Get total 613 matches. 
+  - Time taken by function: 211869 microseconds (0.211869 seconds)
 
 - on GPU :
-  - Get total 1054 matches. 
-  - Time taken by function: **149061** microseconds
+  - Get total 643 matches. 
+  - Time taken by function: 130443 microseconds (0.130443 seconds)
