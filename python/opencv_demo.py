@@ -51,7 +51,8 @@ def draw_matches(src1, src2, kp1, kp2, matches, drawing_type):
             if drawing_type == DrawingType.COLOR_CODED_POINTS_Y:
                 colormap_idx = int(left[1] * 256. / src1.shape[0])  # y-gradient
             if drawing_type == DrawingType.COLOR_CODED_POINTS_XpY:
-                colormap_idx = int((left[0] - src1.shape[1]*.5 + left[1] - src1.shape[0]*.5) * 256. / (src1.shape[0]*.5 + src1.shape[1]*.5))  # manhattan gradient
+                colormap_idx = int((left[0] - src1.shape[1] * .5 + left[1] - src1.shape[0] * .5) * 256. / (
+                            src1.shape[0] * .5 + src1.shape[1] * .5))  # manhattan gradient
 
             color = tuple(map(int, _colormap[colormap_idx, 0, :]))
             cv2.circle(output, tuple(map(int, left)), 1, color, 2)
@@ -62,7 +63,7 @@ def draw_matches(src1, src2, kp1, kp2, matches, drawing_type):
 if __name__ == '__main__':
     img1 = cv2.imread("../data/01.jpg")
     img2 = cv2.imread("../data/02.jpg")
-
+    start = time.time()
     orb = cv2.ORB_create(10000)
     orb.setFastThreshold(0)
 
@@ -71,12 +72,12 @@ if __name__ == '__main__':
     matcher = cv2.BFMatcher(cv2.NORM_HAMMING)
     matches_all = matcher.match(des1, des2)
 
-    start = time.time()
-    matches_gms = matchGMS(img1.shape[:2], img2.shape[:2], kp1, kp2, matches_all, withScale=False, withRotation=False, thresholdFactor=6)
+    matches_gms = matchGMS(img1.shape[:2], img2.shape[:2], kp1, kp2, matches_all, withScale=False, withRotation=False,
+                           thresholdFactor=6)
     end = time.time()
 
     print('Found', len(matches_gms), 'matches')
-    print('GMS takes', end-start, 'seconds')
+    print('GMS takes', end - start, 'seconds')
 
     output = draw_matches(img1, img2, kp1, kp2, matches_gms, DrawingType.ONLY_LINES)
 

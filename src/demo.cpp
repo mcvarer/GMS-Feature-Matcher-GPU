@@ -1,6 +1,10 @@
 #include "gms_matcher.h"
 
-//#define USE_GPU 
+using namespace std::chrono;
+#include <chrono>
+
+
+//#define USE_GPU
 #ifdef USE_GPU
 #include <opencv2/cudafeatures2d.hpp>
 using cuda::GpuMat;
@@ -10,10 +14,15 @@ void GmsMatch(Mat &img1, Mat &img2);
 Mat DrawInlier(Mat &src1, Mat &src2, vector<KeyPoint> &kpt1, vector<KeyPoint> &kpt2, vector<DMatch> &inlier, int type);
 
 void runImagePair() {
-	Mat img1 = imread("../data/01.jpg");
-	Mat img2 = imread("../data/02.jpg");
+	Mat img1 = imread("data/01.jpg");
+	Mat img2 = imread("data/02.jpg");
 
+    auto start = high_resolution_clock::now();
 	GmsMatch(img1, img2);
+	auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    cout << "Time taken by function: "
+         << duration.count() << " microseconds" << endl;
 }
 
 
@@ -55,19 +64,20 @@ void GmsMatch(Mat &img1, Mat &img2) {
 	int num_inliers = gms.GetInlierMask(vbInliers, false, false);
 	cout << "Get total " << num_inliers << " matches." << endl;
 
-	// collect matches
-	for (size_t i = 0; i < vbInliers.size(); ++i)
-	{
-		if (vbInliers[i] == true)
-		{
-			matches_gms.push_back(matches_all[i]);
-		}
-	}
 
-	// draw matching
-	Mat show = DrawInlier(img1, img2, kp1, kp2, matches_gms, 1);
-	imshow("show", show);
-	waitKey();
+	// collect matches
+//	for (size_t i = 0; i < vbInliers.size(); ++i)
+//	{
+//		if (vbInliers[i] == true)
+//		{
+//			matches_gms.push_back(matches_all[i]);
+//		}
+//	}
+//
+//	// draw matching
+//	Mat show = DrawInlier(img1, img2, kp1, kp2, matches_gms, 1);
+//	imshow("show", show);
+//	waitKey();
 }
 
 Mat DrawInlier(Mat &src1, Mat &src2, vector<KeyPoint> &kpt1, vector<KeyPoint> &kpt2, vector<DMatch> &inlier, int type) {
